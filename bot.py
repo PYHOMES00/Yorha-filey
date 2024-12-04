@@ -53,6 +53,7 @@ Bot = Client(
 async def _(bot: Client, cmd: Message):
     await handle_user_status(bot, cmd)
 
+
 @Bot.on_message(filters.command("start") & filters.private)
 async def start(bot: Client, cmd: Message):
 
@@ -73,7 +74,6 @@ async def start(bot: Client, cmd: Message):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        
                         InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
                         InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
                     ],                    [
@@ -97,7 +97,7 @@ async def start(bot: Client, cmd: Message):
             if GetMessage.text:
                 message_ids = GetMessage.text.split(" ")
                 _response_msg = await cmd.reply_text(
-                    text=f"**Total Files:** {len(message_ids)}",
+                    text=f"**Total Files:** `{len(message_ids)}`",
                     quote=True,
                     disable_web_page_preview=True
                 )
@@ -106,7 +106,8 @@ async def start(bot: Client, cmd: Message):
             for i in range(len(message_ids)):
                 await send_media_and_reply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
         except Exception as err:
-            await cmd.reply_text(f"Something went wrong!\n\n**Error:** {err}")
+            await cmd.reply_text(f"Something went wrong!\n\n**Error:** `{err}`")
+
 
 @Bot.on_message((filters.document | filters.video | filters.audio | filters.photo) & ~filters.chat(Config.DB_CHANNEL))
 async def main(bot: Client, message: Message):
@@ -121,7 +122,7 @@ async def main(bot: Client, message: Message):
                 return
 
         if message.from_user.id in Config.BANNED_USERS:
-            await message.reply_text("Sorry, You are banned!\n\n[ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ](https://t.me/ur_HemtaiZ_Bot).",
+            await message.reply_text("Sorry, You are banned!\n\nContact [ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ](https://t.me/ur_HemtaiZ_Bot)",
                                      disable_web_page_preview=True)
             return
 
@@ -149,7 +150,7 @@ async def main(bot: Client, message: Message):
         try:
             forwarded_msg = await message.forward(Config.DB_CHANNEL)
             file_er_id = str(forwarded_msg.id)
-            share_link = f"https://t.me/{Config.BOT_USERNAME}?start=UR_{str_to_b64(file_er_id)}"
+            share_link = f"https://t.me/{Config.BOT_USERNAME}?start=VJBotz_{str_to_b64(file_er_id)}"
             CH_edit = await bot.edit_message_reply_markup(message.chat.id, message.id,
                                                           reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(
                                                               "Get Sharable Link", url=share_link)]]))
@@ -315,7 +316,6 @@ async def button(bot: Client, cmd: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        
                         InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
                         InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
                     ],                    [
@@ -336,7 +336,6 @@ async def button(bot: Client, cmd: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        
                         InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
                         InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
                     ],                    [
@@ -357,7 +356,6 @@ async def button(bot: Client, cmd: CallbackQuery):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        
                         InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
                         InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
                     ],                    [
@@ -381,7 +379,7 @@ async def button(bot: Client, cmd: CallbackQuery):
                 user = await bot.get_chat_member(channel_chat_id, cmd.message.chat.id)
                 if user.status == "kicked":
                     await cmd.message.edit(
-                        text="Sorry Sir, You are Banned to use me. [ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ](https://t.me/ur_HemtaiZ_Bot).",
+                        text="Sorry Sir, You are Banned to use me. Contact my [ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ](https://t.me/ur_HemtaiZ_Bot).",
                         disable_web_page_preview=True
                     )
                     return
@@ -408,17 +406,16 @@ async def button(bot: Client, cmd: CallbackQuery):
                 return
             except Exception:
                 await cmd.message.edit(
-                    text="Something went Wrong. [ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ](https://t.me/ur_HemtaiZ_Bot).",
+                    text="Something went Wrong. Contact my [ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ](https://t.me/ur_HemtaiZ_Bot).",
                     disable_web_page_preview=True
                 )
                 return
-await cmd.message.edit(
+        await cmd.message.edit(
             text=Config.HOME_TEXT.format(cmd.message.chat.first_name, cmd.message.chat.id),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        
                         InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
                         InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
                     ],                    [
@@ -430,8 +427,7 @@ await cmd.message.edit(
                     ]
                 ]
             )
-        ) 
-
+        )
 
     elif cb_data.startswith("ban_user_"):
         user_id = cb_data.split("_", 2)[-1]
