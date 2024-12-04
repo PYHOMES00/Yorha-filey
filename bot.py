@@ -68,18 +68,16 @@ async def start(bot: Client, cmd: Message):
     usr_cmd = cmd.text.split("_", 1)[-1]
     if usr_cmd == "/start":
         await add_user_to_database(bot, cmd)
-        # Send a welcome photo
-        await bot.send_photo(
-            chat_id=cmd.chat.id,
-            photo="https://example.com/path-to-welcome-image.jpg",  # Add a valid image URL or path to local image
-            caption=Config.HOME_TEXT.format(cmd.from_user.first_name, cmd.from_user.id),
+        await cmd.reply_text(
+            Config.HOME_TEXT.format(cmd.from_user.first_name, cmd.from_user.id),
+            disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
+                        
                         InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
                         InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
-                    ],
-                    [
+                    ],                    [
                         InlineKeyboardButton("ᴏɴʟʏ ꜰᴀɴꜱ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+pB7T_8YzkyYxMzI1")
                     ],
                     [
@@ -99,20 +97,17 @@ async def start(bot: Client, cmd: Message):
             message_ids = []
             if GetMessage.text:
                 message_ids = GetMessage.text.split(" ")
-                # Send an image summarizing the details
-                await bot.send_photo(
-                    chat_id=cmd.chat.id,
-                    photo="https://graph.org/file/398d757549f2b79d4f574-e24bf4dbd859ae9e41.png",  # Add another valid image URL or path
-                    caption=f"**Total Files:** `{len(message_ids)}`"
+                _response_msg = await cmd.reply_text(
+                    text=f"**Total Files:** {len(message_ids)}",
+                    quote=True,
+                    disable_web_page_preview=True
                 )
             else:
                 message_ids.append(int(GetMessage.id))
             for i in range(len(message_ids)):
                 await send_media_and_reply(bot, user_id=cmd.from_user.id, file_id=int(message_ids[i]))
         except Exception as err:
-            await cmd.reply_text(f"Something went wrong!\n\n**Error:** `{err}`")
-
-
+            await cmd.reply_text(f"Something went wrong!\n\n**Error:** {err}")
 
 @Bot.on_message((filters.document | filters.video | filters.audio | filters.photo) & ~filters.chat(Config.DB_CHANNEL))
 async def main(bot: Client, message: Message):
@@ -418,32 +413,25 @@ async def button(bot: Client, cmd: CallbackQuery):
                     disable_web_page_preview=True
                 )
                 return
-# First, send a photo
-await cmd.message.reply_photo(
-    photo="https://graph.org/file/398d757549f2b79d4f574-e24bf4dbd859ae9e41.png",  # Add the URL or path to your image
-    caption="Welcome to the bot! Check out the options below.",
-)
-
-# Then, edit the existing message
 await cmd.message.edit(
-    text=Config.HOME_TEXT.format(cmd.message.chat.first_name, cmd.message.chat.id),
-    disable_web_page_preview=True,
-    reply_markup=InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
-                InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
-            ],
-            [
-                InlineKeyboardButton("ᴏɴʟʏ ꜰᴀɴꜱ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+pB7T_8YzkyYxMzI1")
-            ],
-            [
-                InlineKeyboardButton("ᴄᴏʀɴʜᴜʙ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1"),
-                InlineKeyboardButton("ᴊᴀᴠ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+8dIo2yXFOyNjODRl")
-            ]
-        ]
-    )
-)
+            text=Config.HOME_TEXT.format(cmd.message.chat.first_name, cmd.message.chat.id),
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        
+                        InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
+                        InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
+                    ],                    [
+                        InlineKeyboardButton("ᴏɴʟʏ ꜰᴀɴꜱ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+pB7T_8YzkyYxMzI1")
+                    ],
+                    [
+                        InlineKeyboardButton("ᴄᴏʀɴʜᴜʙ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1"),
+                        InlineKeyboardButton("ᴊᴀᴠ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+8dIo2yXFOyNjODRl")
+                    ]
+                ]
+            )
+        ) 
 
 
     elif cb_data.startswith("ban_user_"):
