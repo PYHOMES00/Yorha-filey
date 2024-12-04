@@ -20,8 +20,7 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     InlineKeyboardButton,
     CallbackQuery,
-    Message,
-    InputMediaPhoto
+    Message
 )
 from configs import Config
 from handlers.database import db
