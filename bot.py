@@ -402,7 +402,7 @@ async def button(bot: Client, cmd: CallbackQuery):
                                 InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ⁴", url=invite_link.invite_link)
                             ],
                             [
-                                InlineKeyboardButton("🔄 Refresh 🔄", callback_data="refreshmeh")
+                                InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", callback_data="refreshmeh")
                             ]
                         ]
                     )
