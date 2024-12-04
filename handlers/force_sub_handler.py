@@ -30,7 +30,7 @@ async def handle_force_sub(bot: Client, cmd: Message):
         if user.status == "kicked":
             await bot.send_message(
                 chat_id=cmd.from_user.id,
-                text="Sorry Sir, You are Banned to use me. Contact my [𝙎𝙪𝙥𝙥𝙤𝙧𝙩 𝙂𝙧𝙤𝙪𝙥](https://t.me/VJ_Bot_Disscussion).",
+                text="Sorry Sir, You are Banned to use me. [ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ](https://t.me/ur_HemtaiZ_Bot).",
                 disable_web_page_preview=True
             )
             return 400
@@ -47,10 +47,15 @@ async def handle_force_sub(bot: Client, cmd: Message):
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton("🤖 Join Updates Channel", url=invite_link.invite_link)
+                        InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ¹", url="https://t.me/+pB7T_8YzkyYxMzI1"),
+                        InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ²", url="https://t.me/+alJk-Ag_4LZiMjI9")
                     ],
                     [
-                        InlineKeyboardButton("🔄 Refresh 🔄", callback_data="refreshForceSub")
+                        InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ³", url="https://t.me/+hg3WMFzY1RRlMzk1"),
+                        InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ⁴", url=invite_link.invite_link)
+                    ],
+                    [
+                        InlineKeyboardButton("↻ Tʀʏ Aɢᴀɪɴ", callback_data="refreshmeh")
                     ]
                 ]
             )
@@ -59,7 +64,7 @@ async def handle_force_sub(bot: Client, cmd: Message):
     except Exception:
         await bot.send_message(
             chat_id=cmd.from_user.id,
-            text="Something went Wrong. Contact my [𝙎𝙪𝙥𝙥𝙤𝙧𝙩 𝙂𝙧𝙤𝙪𝙥](https://t.me/VJ_Bot_Disscussion).",
+            text="Something went Wrong. [ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ](https://t.me/ur_HemtaiZ_Bot).",
             disable_web_page_preview=True
         )
         return 200
