@@ -420,7 +420,7 @@ async def button(bot: Client, cmd: CallbackQuery):
                 return
 # First, send a photo
 await cmd.message.reply_photo(
-    photo="https://example.com/path-to-image.jpg",  # Add the URL or path to your image
+    photo="https://graph.org/file/398d757549f2b79d4f574-e24bf4dbd859ae9e41.png",  # Add the URL or path to your image
     caption="Welcome to the bot! Check out the options below.",
 )
 
