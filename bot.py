@@ -418,25 +418,33 @@ async def button(bot: Client, cmd: CallbackQuery):
                     disable_web_page_preview=True
                 )
                 return
-        await cmd.message.edit(
-            text=Config.HOME_TEXT.format(cmd.message.chat.first_name, cmd.message.chat.id),
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                        
-                        InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
-                        InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
-                    ],                    [
-                        InlineKeyboardButton("ᴏɴʟʏ ꜰᴀɴꜱ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+pB7T_8YzkyYxMzI1")
-                    ],
-                    [
-                        InlineKeyboardButton("ᴄᴏʀɴʜᴜʙ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1"),
-                        InlineKeyboardButton("ᴊᴀᴠ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+8dIo2yXFOyNjODRl")
-                    ]
-                ]
-            )
-        )
+# First, send a photo
+await cmd.message.reply_photo(
+    photo="https://example.com/path-to-image.jpg",  # Add the URL or path to your image
+    caption="Welcome to the bot! Check out the options below.",
+)
+
+# Then, edit the existing message
+await cmd.message.edit(
+    text=Config.HOME_TEXT.format(cmd.message.chat.first_name, cmd.message.chat.id),
+    disable_web_page_preview=True,
+    reply_markup=InlineKeyboardMarkup(
+        [
+            [
+                InlineKeyboardButton("ʜᴇɴᴛᴀɪ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+E6B6QP5RJ4gyMDll"),
+                InlineKeyboardButton("ᴄᴏꜱᴘʟᴀʏ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1")
+            ],
+            [
+                InlineKeyboardButton("ᴏɴʟʏ ꜰᴀɴꜱ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+pB7T_8YzkyYxMzI1")
+            ],
+            [
+                InlineKeyboardButton("ᴄᴏʀɴʜᴜʙ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+hg3WMFzY1RRlMzk1"),
+                InlineKeyboardButton("ᴊᴀᴠ ꜱᴛᴀᴛɪᴏɴ", url="https://t.me/+8dIo2yXFOyNjODRl")
+            ]
+        ]
+    )
+)
+
 
     elif cb_data.startswith("ban_user_"):
         user_id = cb_data.split("_", 2)[-1]
